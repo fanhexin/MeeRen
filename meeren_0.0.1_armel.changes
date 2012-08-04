@@ -1,0 +1,23 @@
+Format: 1.8
+Date: Wed, 01 Aug 2012 20:32:51 +0800
+Source: meeren
+Binary: meeren
+Architecture: armel
+Version: 0.0.1
+Distribution: unstable
+Urgency: low
+Maintainer: OceanDeep <fanhexin@gmail.com>
+Changed-By: unknown <>
+Description: 
+ meeren     - Meego的人人网第三方客户端
+Changes: 
+ meeren (0.0.1) unstable; urgency=low
+ .
+   * Initial Release.
+Checksums-Sha1: 
+ 03a3e1110f86887157c541b8860e12e152098237 78056 meeren_0.0.1_armel.deb
+Checksums-Sha256: 
+ c65cd8d4521b68553f9e7d8140b1eb98db644297a545d7930122b8c3584b2cb8 78056 meeren_0.0.1_armel.deb
+Files: 
+ bf2a022082df0601c13c57164da384e2 78056 user/other optional meeren_0.0.1_armel.deb
+Maemo-Display-Name: MeeRen
