@@ -15,9 +15,9 @@ Changes:
  .
    * Initial Release.
 Checksums-Sha1: 
- 03a3e1110f86887157c541b8860e12e152098237 78056 meeren_0.0.1_armel.deb
+ fcab3c59db21e719fbbaa46adb07088ee0769993 92852 meeren_0.0.1_armel.deb
 Checksums-Sha256: 
- c65cd8d4521b68553f9e7d8140b1eb98db644297a545d7930122b8c3584b2cb8 78056 meeren_0.0.1_armel.deb
+ 8c724435b096296c9733abe39cc6226c4c1258aa8fa568615935eb2a9f37538c 92852 meeren_0.0.1_armel.deb
 Files: 
- bf2a022082df0601c13c57164da384e2 78056 user/other optional meeren_0.0.1_armel.deb
+ 13f737bbaf55184811a75aa865a23587 92852 user/other optional meeren_0.0.1_armel.deb
 Maemo-Display-Name: MeeRen

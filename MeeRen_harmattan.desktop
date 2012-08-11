@@ -4,7 +4,7 @@ Version=1.0
 Type=Application
 Terminal=false
 Name=MeeRen
-Exec=/usr/bin/invoker --type=d -s /opt/MeeRen/bin/MeeRen
+Exec=/usr/bin/invoker --splash=/opt/MeeRen/splash.png --type=d -s /opt/MeeRen/bin/MeeRen
 Icon=/usr/share/icons/hicolor/80x80/apps/MeeRen80.png
 X-Window-Icon=
 X-HildonDesk-ShowInToolbar=true

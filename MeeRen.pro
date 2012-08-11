@@ -52,3 +52,8 @@ HEADERS += \
     touchapplicationviewer.h \
     multitouch.h \
     cookiemanager.h
+	
+# Add application splash screen and binary to install.
+splashscreen.files = splash.png
+splashscreen.path = /opt/MeeRen
+INSTALLS += splashscreen

@@ -126,12 +126,28 @@ Page {
                  }
              }
         }
+
+        onMovementStarted: goto_top.state = "Hide"
+        onMovementEnded: goto_top.state = "Show"
     }
 
 
     ScrollDecorator {
         id: scrollDecorator
         flickableItem: contentFlickable
+    }
+
+    GotoTopBtn {
+        id: goto_top
+        anchors {
+            right: parent.right
+            rightMargin: UI.LARGE_MARGIN
+
+            bottom: parent.bottom
+            bottomMargin: UI.NORMAL_MARGIN
+        }
+
+        onClick: contentFlickable.contentY = 0
     }
 
     tools: ToolBarLayout {

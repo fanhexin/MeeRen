@@ -48,7 +48,7 @@ Page {
     Menu {
         id: setting_menu
         MenuLayout {
-            MenuItem { text: "切换主题"; onClicked: theme.inverted = !theme.inverted }
+            MenuItem { text: "切换主题"; onClicked: {theme.inverted = !theme.inverted;console.log(theme.colorScheme);} }
             MenuItem { text: "注销授权"; onClicked: logout() }
             MenuItem { text: "关于"; onClicked: about_page_show() }
         }

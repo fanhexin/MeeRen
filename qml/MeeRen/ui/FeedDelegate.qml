@@ -10,7 +10,6 @@ Item {
     height: (head_img_loader.height > view_col.height)?head_img_loader.height+2*row.anchors.margins:
                                                         view_col.height+2*row.anchors.margins
     width: parent.width
-//    color: 'lightgray'
 
     Row {
         id: row
@@ -178,15 +177,16 @@ Item {
                 }
             }
 
-            Label {
+            LabelBtn {
                 id: photo_title
                 width: parent.width
                 anchors {
                     top: photo_flow.bottom
+                    topMargin: UI.SMALL_MARGIN
                     horizontalCenter: photo_flow.horizontalCenter
                 }
                 text: '['+model.title+']'
-                font.pixelSize: UI.FONT_SIZE_SMALLER
+                onClick: album_view(model.source_id)
             }
         }
     }
@@ -346,12 +346,20 @@ Item {
     }
 
     function pop_photo_win(index) {
-        large_photo_view_panel.show(attachment.get(index).raw_src);
-//        var tmp = Qt.createComponent("LargePhotoView.qml");
-//        var tip = tmp.createObject(appWindow, {
-//                                       raw_src: attachment.get(index).raw_src
-//                                   });
-//        tip.show();
+        //large_photo_view_panel.show(attachment.get(index).raw_src);
+//        var tmp = [];
+//        for (var i = 0; i < attachment.count; i++) {
+//            tmp.push(attachment.get(i).raw_src);
+//        }
+
+        appWindow.pageStack.push(Qt.resolvedUrl("../ImageViewPage.qml"), {
+                            img_url: attachment,
+                            current_index: index
+                       });
+    }
+
+    function album_view(aid) {
+
     }
 
     function jmp_comment_page() {

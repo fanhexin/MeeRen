@@ -141,7 +141,7 @@ function sender(pair, callback)
     doc.onreadystatechange = function() {
 		if(doc.readyState == XMLHttpRequest.HEADERS_RECEIVED){
 	    }else if(doc.readyState == XMLHttpRequest.DONE){
-//            console.log(doc.responseText);
+            console.log(doc.responseText);
             var json = JSON.parse(doc.responseText);
             callback(json);
 	    }

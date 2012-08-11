@@ -10,7 +10,6 @@ Item {
     anchors.topMargin: 35
 
     property alias raw_src: large_img.source
-    property variant touchPoints: multitouch.touchPoints
     property int distance
     visible: false
     state: 'close'
@@ -30,7 +29,6 @@ Item {
         asynchronous: true
         anchors {
             top: parent.top
-            //topMargin: 40
             left: parent.left
             rightMargin: 16
         }

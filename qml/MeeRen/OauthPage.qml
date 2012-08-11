@@ -38,8 +38,8 @@ Page {
             anchors.fill: parent
             visible: false
             url: SDK.generate_oauth_url()
-            preferredWidth: parent.width
-            preferredHeight: parent.height
+            preferredWidth: web_view.width
+            preferredHeight: web_view.height
             scale: 1
             smooth: false
 
@@ -63,7 +63,20 @@ Page {
             }
 
             onLoadFinished: {
-                evaluateJavaScript('document.getElementsByClassName("close")[0].style.display="none";document.getElementsByClassName("register")[0].style.display="none";document.getElementsByClassName("button-box item")[0].childNodes[1].style.display="none";');
+                var jsCode = 'document.getElementsByClassName("close")[0].style.display="none";' +
+                            'document.getElementsByClassName("register")[0].style.display="none";' +
+                            'document.getElementsByClassName("button-box item")[0].childNodes[1].style.display="none";' +
+                            'document.body.style.fontSize="19px";' +
+                            'document.getElementsByClassName("input-button")[0].style.fontSize="22px";' +
+                            'document.getElementsByClassName("content")[0].style.paddingTop="100px";' +
+                            'document.getElementsByClassName("item")[0].style.textAlign="center";' +
+                            'document.getElementsByClassName("item")[1].style.textAlign="center";' +
+                            'document.getElementsByClassName("textbox")[0].style.width="240px";' +
+                            'document.getElementsByClassName("textbox")[1].style.width="240px";' +
+                            'document.getElementsByClassName("button-box item")[0].style.paddingLeft="147px";'+
+                            'document.getElementsByClassName("login")[0].style.width="480px";';
+
+                evaluateJavaScript(jsCode);
                 waiting_dlg.visible = false;
             }
         }

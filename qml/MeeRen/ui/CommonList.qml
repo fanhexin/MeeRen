@@ -76,8 +76,24 @@ ListView {
         }
     }
 
+    GotoTopBtn {
+        id: goto_top
+        anchors {
+            right: parent.right
+            rightMargin: UI.LARGE_MARGIN
+
+            bottom: parent.bottom
+            bottomMargin: UI.NORMAL_MARGIN
+        }
+
+        onClick: listView.positionViewAtBeginning()
+    }
+
+    onMovementStarted: goto_top.state = "Hide"
+
     onMovementEnded:
     {
+        goto_top.state = "Show";
         if(listView.model.count != 0)
         {
             if(listView.atYEnd)
