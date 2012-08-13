@@ -20,6 +20,7 @@ Item {
             right: parent.right
             leftMargin: UI.BALLOON_BOX_BORDER_LEN
         }
+        spacing: UI.NORMAL_MARGIN
 
         Label {
             id: content

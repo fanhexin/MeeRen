@@ -33,7 +33,8 @@ CONFIG += qdeclarative-boostable
 SOURCES += main.cpp \
     touchapplicationviewer.cpp \
     multitouch.cpp \
-    cookiemanager.cpp
+    cookiemanager.cpp \
+    settings.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -51,7 +52,8 @@ OTHER_FILES += \
 HEADERS += \
     touchapplicationviewer.h \
     multitouch.h \
-    cookiemanager.h
+    cookiemanager.h \
+    settings.h
 	
 # Add application splash screen and binary to install.
 splashscreen.files = splash.png

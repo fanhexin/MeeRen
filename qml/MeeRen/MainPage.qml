@@ -2,11 +2,16 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 import "ui"
-import "./Database.js" as DB
 
 Page {
     id: main_page
     orientationLock: PageOrientation.LockPortrait
+
+    onVisibleChanged: {
+        if (main_page.visible) {
+            appWindow.showStatusBar = true;
+        }
+    }
 
     tools: ToolBarLayout {
         ToolIcon {
@@ -48,7 +53,7 @@ Page {
     Menu {
         id: setting_menu
         MenuLayout {
-            MenuItem { text: "切换主题"; onClicked: {theme.inverted = !theme.inverted;console.log(theme.colorScheme);} }
+            MenuItem { text: "切换主题"; onClicked: change_theme()}
             MenuItem { text: "注销授权"; onClicked: logout() }
             MenuItem { text: "关于"; onClicked: about_page_show() }
         }
@@ -76,7 +81,7 @@ Page {
                                        content_text: '是否真的要注销授权？'
                                    });
         dlg.accepted.connect(function() {
-                                   DB.destory();
+                                   setting.clear();
                                    cm.clearCookies();
                                    appWindow.pageStack.clear();
                                    appWindow.pageStack.push(Qt.resolvedUrl("./OauthPage.qml"));
@@ -86,5 +91,10 @@ Page {
 
     function about_page_show() {
         appWindow.pageStack.push(Qt.resolvedUrl("./AboutPage.qml"));
+    }
+
+    function change_theme() {
+        theme.inverted = !theme.inverted;
+        setting.setValue("dark_theme", theme.inverted.toString());
     }
 }

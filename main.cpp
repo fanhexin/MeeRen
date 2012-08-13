@@ -3,6 +3,7 @@
 #include "touchapplicationviewer.h"
 #include "multitouch.h"
 #include "cookiemanager.h"
+#include "settings.h"
 //#include <meventfeed.h>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -12,9 +13,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     //QmlApplicationViewer viewer;
     //qmlRegisterType<MyWebView>("mylib", 1, 0, "MyWebView");
 
+
     MultiTouch touch;
     TouchApplicationViewer viewer(&touch);
     viewer.rootContext()->setContextProperty("multitouch", &touch);
+
+    QSettings setting("IndependentSoft", "MeeRen");
+    Settings config(&setting);
+    viewer.rootContext()->setContextProperty("setting", &config);
 
     CookieManager* cm = new CookieManager(viewer.engine(), &viewer);
     viewer.rootContext()->setContextProperty("cm", cm);

@@ -41,7 +41,6 @@ Item {
                         left: parent.left
                     }
 
-                    //visible: (model.page_type == 'feeds_page')
                     text: model.name
                     color: 'steelblue'
                 }
@@ -186,7 +185,7 @@ Item {
                     horizontalCenter: photo_flow.horizontalCenter
                 }
                 text: '['+model.title+']'
-                onClick: album_view(model.source_id)
+                onClick: album_view()
             }
         }
     }
@@ -198,7 +197,9 @@ Item {
             label_text: '<a style="font:bold;color:steelblue;">'+model.attachment.get(0).owner_name+'</a>'+
                   '<p style="font:bold;">'+model.title+'</p>';
             Component.onCompleted: {
-                var handle = share_photo.add_item_to_column('PhotoView.qml', {'photo_src': attachment.get(0).src});
+                var handle = share_photo.add_item_to_column('PhotoView.qml', {
+                                                                'photo_src': attachment.get(0).src
+                                                            });
                 handle.click.connect(function(){pop_photo_win(0);});
             }
         }
@@ -346,20 +347,36 @@ Item {
     }
 
     function pop_photo_win(index) {
-        //large_photo_view_panel.show(attachment.get(index).raw_src);
-//        var tmp = [];
-//        for (var i = 0; i < attachment.count; i++) {
-//            tmp.push(attachment.get(i).raw_src);
-//        }
+        var param = {
+            data: attachment,
+            current_index: index
+        };
 
-        appWindow.pageStack.push(Qt.resolvedUrl("../ImageViewPage.qml"), {
-                            img_url: attachment,
-                            current_index: index
-                       });
+        switch (model.feed_type) {
+        case SDK.FEED_TYPE_PHOTO:
+        case SDK.FEED_TYPE_PAGE_PHOTO:
+            param.aid = model.source_id;
+            param.uid = model.actor_id;
+            break;
+        case SDK.FEED_TYPE_SHARE_PHOTO:
+        case SDK.FEED_TYPE_PAGE_SHARE_PHOTO:
+            var reg_exp = new RegExp("album-\(.*\)$", "g");
+            var ret = reg_exp.exec(model.href);
+            param.aid = parseInt(ret[1]);
+            param.uid = model.attachment.get(0).owner_id;
+            break;
+        default:
+            break;
+        }
+
+        appWindow.pageStack.push(Qt.resolvedUrl("../ImageViewPage.qml"), param);
     }
 
     function album_view(aid) {
-
+        appWindow.pageStack.push(Qt.resolvedUrl("../ImageFlowPage.qml"), {
+                            aid: model.source_id,
+                            uid: model.actor_id
+                       });
     }
 
     function jmp_comment_page() {

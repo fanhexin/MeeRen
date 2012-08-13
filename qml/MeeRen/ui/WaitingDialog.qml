@@ -5,7 +5,7 @@ import com.nokia.meego 1.0
 Item{
     id:waitingDialog
     visible: false
-    anchors.fill: parent;
+    anchors.fill: parent
     z:100
     Rectangle{
         id:shaderLayer

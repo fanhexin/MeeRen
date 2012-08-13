@@ -3,7 +3,6 @@ import com.nokia.meego 1.0
 import "ui"
 import QtWebKit 1.0
 import "./sdk.js" as SDK
-import "./Database.js" as DB
 
 Page {
     orientationLock: PageOrientation.LockPortrait
@@ -54,8 +53,11 @@ Page {
                                       appWindow.uid = json.uid.toString();
                                       appWindow.head_url = json.tinyurl;
 
-                                      DB.init();
-                                      DB.add_session(json.uid.toString(), json.name, json.tinyurl, ret[1]);
+                                      setting.setValue("uid", json.uid.toString());
+                                      setting.setValue("name", json.name);
+                                      setting.setValue("head_url", json.tinyurl);
+                                      setting.setValue("access_token", ret[1]);
+                                      setting.setValue("dark_theme", "false");
                                   });
                     pageStack.pop();
                     pageStack.push(Qt.resolvedUrl("./MainPage.qml"));

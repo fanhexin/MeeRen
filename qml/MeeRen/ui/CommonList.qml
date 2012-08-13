@@ -12,11 +12,9 @@ ListView {
     signal dragRefresh
     signal dragLoadMore
 
-    //anchors.fill: parent
     model: ListModel{}
     clip: true
     focus: true
-//    orientation: ListView.Vertical
     //flickDeceleration: 1000
     cacheBuffer: 854*2
 

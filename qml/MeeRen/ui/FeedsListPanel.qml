@@ -71,6 +71,7 @@ Item {
                                          source_id: json[i].source_id,
                                          share_pr: (json[i].trace)?json[i].trace.text:null,
                                          comments: json[i].comments,
+                                         href: json[i].href,
                                          page_type: page_type
                                      });
                      }

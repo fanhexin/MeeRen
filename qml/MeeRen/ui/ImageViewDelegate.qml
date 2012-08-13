@@ -6,22 +6,28 @@ Item {
     width: UI.SCREEN_WIDTH
     height: parent.height
 
+    WaitingDialog {
+        id: photo_waiting_dlg
+    }
+
     Image {
         id: photo
         height: UI.SCREEN_HEIGHT
         width: UI.SCREEN_WIDTH
         anchors.centerIn: parent
-        source: model.src
+        source: (model.raw_src)?model.raw_src:model.url_large
         fillMode: Image.PreserveAspectFit
 
         onStatusChanged: {
-            if (photo.status == Image.Ready)
-                waiting_dlg.visible = false;
+            if (photo.status == Image.Ready) {
+                photo_waiting_dlg.visible = false;
+            }
         }
-        onSourceChanged: {
-            if (photo.status == Image.Ready)
-                return;
-            waiting_dlg.visible = true;
+
+        Component.onCompleted: {
+            if (photo.status != Image.Ready) {
+                photo_waiting_dlg.visible = true;
+            }
         }
     }
 }

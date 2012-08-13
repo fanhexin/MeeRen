@@ -5,6 +5,7 @@ import "ui"
 import "./UIConstants.js" as UI
 
 Page {
+    orientationLock: PageOrientation.LockPortrait
     Header {
         id: header
         content: '关于MeeRen'

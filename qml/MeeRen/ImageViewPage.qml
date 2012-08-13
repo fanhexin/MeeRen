@@ -7,7 +7,18 @@ import "./UIConstants.js" as UI
 Page {
     id: me
     property int current_index
-    property variant img_url
+    property alias data: img_list.model
+    property int aid
+    property int uid
+    orientationLock: PageOrientation.LockPortrait
+
+    Timer {
+        id: timer
+        interval: 5000
+        onTriggered: {
+            me.state = "HideBar";
+        }
+    }
 
     states: [
         State {
@@ -16,7 +27,7 @@ Page {
             StateChangeScript {
                 script: {
                     showToolBar = true
-                    showStatusBar = true
+                    timer.start()
                 }
             }
         },
@@ -26,7 +37,6 @@ Page {
             StateChangeScript {
                 script: {
                     showToolBar = false
-                    showStatusBar = false
                 }
             }
         }
@@ -38,7 +48,6 @@ Page {
         clip: true
         spacing: UI.NORMAL_MARGIN
         cacheBuffer: 480*2
-        model: ListModel{}
         delegate: ImageViewDelegate{}
         snapMode: ListView.SnapOneItem
         orientation: ListView.Horizontal
@@ -49,6 +58,8 @@ Page {
                 me.state = (me.state == "HideBar")?"ShowBar":"HideBar";
             }
         }
+
+        Component.onCompleted: img_list.positionViewAtIndex(current_index, ListView.Center)
     }
 
     ScrollDecorator {
@@ -65,14 +76,22 @@ Page {
                 pageStack.pop();
             }
         }
+
+        ToolIcon {
+            visible: uid
+            iconId: "toolbar-pages-all"
+            onClicked: {
+                timer.stop();
+                appWindow.pageStack.push(Qt.resolvedUrl("./ImageFlowPage.qml"), {
+                                             uid: uid,
+                                             aid: aid
+                                         });
+            }
+        }
     }
 
     Component.onCompleted: {
-        img_list.model.append({src:img_url.get(current_index).raw_src});
-        for (var i = 0; i < img_url.count; i++) {
-            if (i == current_index)
-                continue;
-            img_list.model.append({src:img_url.get(i).raw_src});
-        }
+        appWindow.showStatusBar = false;
+        me.state = "HideBar";
     }
 }

@@ -3,7 +3,6 @@ import com.nokia.meego 1.0
 import com.nokia.extras 1.0
 import "ui"
 import "model"
-import "./Database.js" as DB
 import "./sdk.js" as SDK
 import Multitouch 1.0
 
@@ -52,22 +51,17 @@ PageStackWindow {
         id: action_menu
     }
 
-
-
     Component.onCompleted: {
-        DB.init();
-        DB.get_session(function(item) {
-                           if (item) {
-                               SDK.set_token(item.access_token);
-                               appWindow.uid = item.uid;
-                               appWindow.name = item.name;
-                               appWindow.head_url = item.head_url;
-
-                               pageStack.push(Qt.resolvedUrl("./MainPage.qml"));
-                           }else{
-                               pageStack.push(Qt.resolvedUrl("./OauthPage.qml"));
-                           }
-                       });
+        if (!setting.value("uid")) {
+            pageStack.push(Qt.resolvedUrl("./OauthPage.qml"));
+        }else {
+            appWindow.uid = setting.value("uid").toString();
+            appWindow.name = setting.value("name").toString();
+            appWindow.head_url = setting.value("head_url").toString();
+            theme.inverted = (setting.value("dark_theme").toString() == "true")?true:false;
+            SDK.set_token(setting.value("access_token").toString());
+            pageStack.push(Qt.resolvedUrl("./MainPage.qml"));
+        }
     }
 
     function scaleChanged(scale) {
